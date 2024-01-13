@@ -1,13 +1,11 @@
 package com.example.memoriegame;
 
-import android.app.Activity;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.SystemClock;
 import android.util.Log;
@@ -25,11 +23,16 @@ public class MemorieGame_fg extends Fragment {
 
     private TextView Score;
     private TextView Timer;
-    private int nImages = 18;
+    private int nCartas = 18;
+
+    //CARTAS
     private int nLimMCards = 32;
     private int nLimmCards = 8;
-    private ImageView[] Imagens = new ImageView[nImages];
-    private Integer[] ordemCartas= new Integer[nImages];
+
+    //OBJ
+    private Cartas[] cartas = new Cartas[nCartas];
+    private ImageView[] Imagens = new ImageView[nCartas];
+    private Integer[] ordemCartas= new Integer[nCartas];
 
     //Score
     private int score = 0;
@@ -42,6 +45,9 @@ public class MemorieGame_fg extends Fragment {
     private int intervalTime = 10;
 
     private int turno = 0;
+    private Handler hand;
+
+    private Timer counterTime = new Timer(Integer.MAX_VALUE);
 
 
     //TimeSpan
@@ -69,7 +75,20 @@ public class MemorieGame_fg extends Fragment {
         Timer = view.findViewById(R.id.TimerText);
         Timer.setText("00:00");
 
-        CountDownTimer countDownTimer = new CountDownTimer(totalTime, intervalTime) {
+        //Iniciar Timer
+        counterTime.iniciarContador();
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                int tempoAtual = counterTime.getTempoAtual();
+                counterTime.checkLimM();
+                Timer.setText(String.valueOf(tempoAtual));
+                new Handler().postDelayed(this, 1000);
+            }
+        }, 1000);
+
+        /*CountDownTimer countDownTimer = new CountDownTimer(totalTime, intervalTime) {
             @Override
             public void onTick(long millisUntilFinished) {
                 // Atualize o TextView a cada intervalo
@@ -81,10 +100,10 @@ public class MemorieGame_fg extends Fragment {
             public void onFinish() {
 
             }
-        };
+        };*/
 
         // Inicie o temporizador
-        countDownTimer.start();
+        /*countDownTimer.start();*/
 
         //carregar as imagens para o array
         loadImgs(view);
@@ -231,4 +250,5 @@ public class MemorieGame_fg extends Fragment {
 
         return aux;
     }
+
 }
