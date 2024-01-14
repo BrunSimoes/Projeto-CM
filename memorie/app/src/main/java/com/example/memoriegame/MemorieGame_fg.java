@@ -28,15 +28,18 @@ public class MemorieGame_fg extends Fragment {
 
     private TextView Score;
     private TextView Timer;
-    private int nCartas = 18;
+    private int nCartas = 20;
+    private int nPower = 3;
 
     //CARTAS
     private int nLimMCards = 32;
     private int nLimmCards = 8;
 
     //OBJ
-    private Cartas[] cartas = new Cartas[nCartas];
-    private ImageView[] Imagens = new ImageView[nCartas];
+    private Cartas[] cartas = new Cartas[nCartas+nPower];
+    private ImageView[] Imagens = new ImageView[nCartas+nPower];
+
+    private Integer[] idPowerUps = new Integer[nPower];
 
     //Score
     private int score = 0;
@@ -68,6 +71,8 @@ public class MemorieGame_fg extends Fragment {
     private float salto     = 1.f;
 
     private int margem      = 2;
+
+    private int posPower    = 0;
 
     //Button
     private ImageButton hamButton;
@@ -119,29 +124,14 @@ public class MemorieGame_fg extends Fragment {
             }
         }, 1000);
 
-        /*CountDownTimer countDownTimer = new CountDownTimer(totalTime, intervalTime) {
-            @Override
-            public void onTick(long millisUntilFinished) {
-                // Atualize o TextView a cada intervalo
-                long secondsRemaining = millisUntilFinished * 1000;
-                Timer.setText("Tempo: " + secondsRemaining);
-            }
-
-            @Override
-            public void onFinish() {
-
-            }
-        };*/
-
-        // Inicie o temporizador
-        /*countDownTimer.start();*/
-
         //carregar as imagens para o array
         loadImgs(view);
         associate();
 
         //shuffle mistura as imagens
         Collections.shuffle(Arrays.asList(cartas));
+
+        getPowerCords();
 
         for(int i = 0; i < Imagens.length; i++) {
             final int pos = i;
@@ -151,31 +141,40 @@ public class MemorieGame_fg extends Fragment {
                 @Override
                 public void onClick(View view) {
                     if (nClicks == 0) {
-                        primeiraCarta = cartas[pos].obterIdImage();
-                        Log.d("prima", String.valueOf(primeiraCarta));
-                        nClicks++;
+                            primeiraCarta = cartas[pos].obterIdImage();
 
-                        Imagens[pos].setClickable(false);
-                        mostrarCarta(Imagens[pos],cartas[pos].obterIdImage());
-                        cartas[pos].setClicked(true);
+                            Imagens[pos].setClickable(false);
+                            cartas[pos].setClicked(true);
+                            pos1Carta=pos;
+                            mostrarCarta(Imagens[pos],cartas[pos].obterIdImage());
 
-                        pos1Carta=pos;
+                            if(checkPower(pos)) {
+                                mPower();
+                                posPower=pos;
+                            }else{
+                                nClicks++;
+                            }
+
 
                     } else if (nClicks == 1) {
+                        pos2Carta = pos;
                         segundaCarta = cartas[pos].obterIdImage();
                         Log.d("cega", String.valueOf(segundaCarta));
 
-                        mostrarCarta(Imagens[pos],cartas[pos].obterIdImage());
+                        mostrarCarta(Imagens[pos], cartas[pos].obterIdImage());
                         Imagens[pos].setClickable(false);
                         cartas[pos].setClicked(true);
 
-                        nClicks=0;
-                        pos2Carta=pos;
+                        nClicks = 0;
 
-                        unable();
-
-                        Handler handler = new Handler();
-                        handler.postDelayed((Runnable) () -> mecanica(),750);
+                        if(checkPower(pos)) {
+                            posPower=pos;
+                            mPower();
+                        }else{
+                            unable();
+                            Handler handler = new Handler();
+                            handler.postDelayed((Runnable) () -> mecanica(), 750);
+                        }
                     }
                 }
             });
@@ -209,17 +208,19 @@ public class MemorieGame_fg extends Fragment {
 
     private void loadImgs(View view){
         // Usando um ciclo para inicializar os TextViews com findViewById
-        int aux = 1;
+        int aux  = 1;
+        int auxB = 0;
+        String card = "carta";
 
-        for (int i = 0; i < 18; i++) {
-                Log.d("int",i+"");
-                Log.d("id", "imageView" + (i));
+        for (int i = 0; i < nCartas + nPower; i++) {
+                //Log.d("int",i+"");
+                //Log.d("id", "imageView" + (i));
 
                 int viewImageId = getResources().getIdentifier("imageView" + (i+1), "id", getActivity().getPackageName());
                 Imagens[i] = view.findViewById(viewImageId);
 
                 aux++;
-                if(i%9==0){
+                if(i%(nCartas/2)==0){
                     aux=1;
                 }
 
@@ -227,25 +228,56 @@ public class MemorieGame_fg extends Fragment {
 
                 if (Imagens[i] != null) {
                     Imagens[i].setTag(i);
-                    Log.d("tag",i+"");
-                    int resourceId = getResources().getIdentifier("carta" + aux, "drawable", getActivity().getPackageName());
-                    Log.d("bb", (i % 9)+"");
+                    int resourceId = 0;
+                        //Log.d("tag", i + "");
+                        if(i < nCartas) {
+                            resourceId = getResources().getIdentifier("carta" + aux, "drawable", getActivity().getPackageName());
+                        }else if(i < nCartas + nPower){
+                            Log.d("debug",""+i);
+                            resourceId = getResources().getIdentifier("powerup" + aux, "drawable", getActivity().getPackageName());
 
-                    if (resourceId != 0) {
-                        cartas[i] = new Cartas(resourceId,i);
-                        Imagens[i].setImageResource(R.drawable.carta_fundo);
-                        Imagens[i].setClickable(true);
-                    }
+                            if(aux==1){
+                                card = "Tempo";
+                            }else if(aux==2){
+                                card = "Roda";
+                            }else{
+                                card = "2x";
+                            }
+                        }
+                        //Log.d("bb", (i % 9) + "");
+
+                        if (resourceId != 0) {
+                            cartas[i] = new Cartas(resourceId, i,card);
+                            Imagens[i].setImageResource(R.drawable.carta_fundo);
+                            Imagens[i].setClickable(true);
+                        }
+
                 }
+        }
+
+        /*for(int i=0; i<nPower; i++){
+
+        }*/
+    }
+
+
+    private boolean checkPower(int pos){
+        boolean power = false;
+
+        for(int i=0; i<idPowerUps.length; i++){
+            if(pos==idPowerUps[i]){
+                power=true;
+                break;
             }
+        }
+        return power;
     }
 
-    private void setTurn(){
-
-    }
-
-    private void setDialog(){
-
+    private void mPower(){
+        unable();
+        Handler handler = new Handler();
+        handler.postDelayed((Runnable) () -> powerMec(),750);
+        nClicks=0;
     }
 
 
@@ -283,6 +315,17 @@ public class MemorieGame_fg extends Fragment {
         }
     }
 
+    private void powerMec(){
+        if(posPower!=pos1Carta){
+            ocultarCarta(Imagens[pos1Carta],R.drawable.carta_fundo);
+        }
+
+        turno++;
+        cartas[posPower].desativar();
+        iniciarAnimacao(Imagens[posPower], 1.0f, 0.1f);
+        enable();
+    }
+
     private void unable(){
         for(int i=0; i<Imagens.length; i++){
             Imagens[i].setClickable(false);
@@ -307,6 +350,17 @@ public class MemorieGame_fg extends Fragment {
         }
 
         return aux;
+    }
+
+    private void getPowerCords(){
+        int a = 0;
+
+        for(int i = 0; i<Imagens.length; i++){
+            if(cartas[i].obterType()!="carta") {
+                idPowerUps[a] = i;
+                a++;
+            }
+        }
     }
 
     private void calcScore(){
@@ -415,6 +469,8 @@ public class MemorieGame_fg extends Fragment {
         Timer.setText("00:00");
 
         Collections.shuffle(Arrays.asList(cartas));
+
+        getPowerCords();
 
         Log.d("restart","restart");
     }

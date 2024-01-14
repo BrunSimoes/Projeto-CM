@@ -330,7 +330,7 @@
 
             </LinearLayout>
 
-            <!--<LinearLayout
+            <LinearLayout
                 android:id="@+id/linearLayout4"
                 android:layout_width="410dp"
                 android:layout_height="100dp"
@@ -340,7 +340,7 @@
                 tools:layout_editor_absoluteX="-2dp">
 
                 <ImageView
-                    android:id="@+id/imageView13"
+                    android:id="@+id/imageView19"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginStart="15dp"
@@ -349,7 +349,7 @@
                     android:src="@drawable/carta_fundo" />
 
                 <ImageView
-                    android:id="@+id/imageView14"
+                    android:id="@+id/imageView20"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginStart="4dp"
@@ -358,7 +358,7 @@
                     android:src="@drawable/carta_fundo" />
 
                 <ImageView
-                    android:id="@+id/imageView15"
+                    android:id="@+id/imageView21"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginStart="4dp"
@@ -367,7 +367,7 @@
                     android:src="@drawable/carta_fundo" />
 
                 <ImageView
-                    android:id="@+id/imageView16"
+                    android:id="@+id/imageView22"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginStart="4dp"
@@ -376,7 +376,7 @@
                     android:src="@drawable/carta_fundo" />
 
                 <ImageView
-                    android:id="@+id/imageView17"
+                    android:id="@+id/imageView23"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginStart="4dp"
@@ -385,15 +385,16 @@
                     android:src="@drawable/carta_fundo" />
 
                 <ImageView
-                    android:id="@+id/imageView18"
+                    android:id="@+id/imageViewBlack"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginStart="4dp"
+                    android:visibility="invisible"
                     android:layout_marginEnd="15dp"
                     android:layout_weight="1"
                     android:src="@drawable/carta_fundo" />
 
-            </LinearLayout>-->
+            </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -401,6 +402,7 @@
             android:id="@+id/powerUpMenu"
             android:layout_width="match_parent"
             android:layout_height="100dp"
+            android:background="#2F806F"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
@@ -409,18 +411,48 @@
                 android:id="@+id/textView5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+
                 android:text="Power-Ups"
-                tools:layout_editor_absoluteX="14dp"
-                tools:layout_editor_absoluteY="11dp" />
+                tools:layout_editor_absoluteX="290dp"
+                tools:layout_editor_absoluteY="65dp" />
 
             <LinearLayout
-                android:layout_width="343dp"
-                android:layout_height="69dp"
+                android:layout_width="239dp"
+                android:layout_height="90dp"
                 android:background="#2F806F"
                 android:orientation="horizontal"
                 android:radius="20px"
                 tools:layout_editor_absoluteX="0dp"
-                tools:layout_editor_absoluteY="30dp"></LinearLayout>
+                tools:layout_editor_absoluteY="9dp">
+
+                <ImageView
+                    android:id="@+id/imagePower1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginEnd="4dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/carta_fundo" />
+
+                <ImageView
+                    android:id="@+id/imagePower2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginEnd="4dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/carta_fundo" />
+
+                <ImageView
+                    android:id="@+id/imagePower3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginEnd="4dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/carta_fundo" />
+
+            </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

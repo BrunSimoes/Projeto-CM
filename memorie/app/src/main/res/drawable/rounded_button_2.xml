@@ -1,10 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<<<<<<< HEAD
-<shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <solid android:color="@color/branco_sujo" /> <!-- Button background color -->
-    <corners android:radius="18dp" /> <!-- Radius for rounded corners -->
-</shape>
-=======
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item>
         <shape xmlns:android="http://schemas.android.com/apk/res/android">
@@ -31,4 +25,3 @@
         </shape>
     </item>
 </selector>
->>>>>>> 6e54093d364a7de7e4ba30ab24dc3a98f34f6f77
