@@ -377,8 +377,10 @@ public class MemorieGame_fg extends Fragment {
 
         for (int i = 0; i < Imagens.length; i++) {
             if (cartas[i].obterStatus()) {
-                aux = false;
-                break;
+                if(cartas[i].obterType()!="joker") {
+                    aux = false;
+                    break;
+                }
             }
         }
 
@@ -509,9 +511,9 @@ public class MemorieGame_fg extends Fragment {
 
         getJokerCord();
 
-        for(int i = 1; i<=(nPower/2); i++) {
+        for(int i = 0; i<(nPower/2); i++) {
             ImagePower[i].setAlpha(1f);
-            powers[i].ativarPower();
+            powers[i].desabilitarPower();
             ImagePower[i].setClickable(true);
             updateSat(ImagePower[i],0.f, powers[i].obterImageId());
         }
@@ -557,7 +559,7 @@ public class MemorieGame_fg extends Fragment {
                                             multiplayer = 2;
                                             iniciarAnimacao(ImagePower[posP],1f,0.1f);
                                         }
-                                        
+
                                         if(!ui) {
                                             ImagePower[posP].setClickable(false);
                                             powers[posP].desabilitarPower();
