@@ -14,8 +14,8 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/header"
-            android:layout_width="match_parent"
-            android:layout_height="164dp"
+            android:layout_width="417dp"
+            android:layout_height="147dp"
             android:layout_marginTop="4dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -119,8 +119,8 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/tabuleiro"
-            android:layout_width="407dp"
-            android:layout_height="441dp"
+            android:layout_width="414dp"
+            android:layout_height="412dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="2dp"
             app:layout_constraintBottom_toTopOf="@+id/powerUpMenu"
@@ -206,6 +206,7 @@
                 android:layout_height="100dp"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
@@ -271,6 +272,7 @@
                 android:layout_marginTop="4dp"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
 
@@ -337,7 +339,7 @@
                 android:layout_marginTop="4dp"
                 android:orientation="horizontal"
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
-                tools:layout_editor_absoluteX="-2dp">
+                tools:layout_editor_absoluteX="0dp">
 
                 <ImageView
                     android:id="@+id/imageView19"
@@ -389,10 +391,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginStart="4dp"
-                    android:visibility="invisible"
                     android:layout_marginEnd="15dp"
                     android:layout_weight="1"
-                    android:src="@drawable/carta_fundo" />
+                    android:src="@drawable/carta_fundo"
+                    android:visibility="invisible" />
 
             </LinearLayout>
 
@@ -401,30 +403,65 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/powerUpMenu"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="138dp"
             android:background="#2F806F"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent">
+
+            <LinearLayout
+                android:id="@+id/powerDisplay"
+                android:layout_width="264dp"
+                android:layout_height="113dp"
+                android:background="#2F806F"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView5"
+                app:layout_constraintVertical_bias="0.0">
+
+                <ImageView
+                    android:id="@+id/imageViewPower1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginEnd="4dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/powerup1" />
+
+                <ImageView
+                    android:id="@+id/imageViewPower2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginEnd="4dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/powerup2_2" />
+
+                <ImageView
+                    android:id="@+id/imageViewPower3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginEnd="4dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/powerup3" />
+
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/textView5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
 
+                android:layout_marginStart="4dp"
                 android:text="Power-Ups"
-                tools:layout_editor_absoluteX="290dp"
-                tools:layout_editor_absoluteY="65dp" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-            <LinearLayout
-                android:id="@+id/powerDisplay"
-                android:layout_width="239dp"
-                android:layout_height="90dp"
-                android:background="#2F806F"
-                android:orientation="horizontal"
-                android:radius="20px"
-                tools:layout_editor_absoluteX="0dp"
-                tools:layout_editor_absoluteY="9dp"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

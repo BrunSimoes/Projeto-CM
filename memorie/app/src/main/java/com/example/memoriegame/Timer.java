@@ -45,4 +45,8 @@ public class Timer {
     public void reset(){
         tempoAtual=0;
     }
+
+    public void reduceTime(int reduce){
+        tempoAtual-=reduce;
+    }
 }

@@ -6,25 +6,33 @@ public class PowerUps {
     private int ImageId;
     private boolean status;
     private boolean disponibilidade;
+    private int idImage;
+    private String type;
 
-    public PowerUps(int id) {
+    public PowerUps(String type, int id, int idImage) {
         this.id     = id;
         this.status = false;
         this.disponibilidade = false;
+        this.type = type;
+        this.idImage = idImage;
     }
 
     //Ativar power-up especifico
-    private void ativarPower(){
+    public void ativarPower(){
       status = true;
     }
 
     //get Status do Power UP
-    private boolean getStatus(){
+    public boolean getStatus(){
         return status;
+    }
+    public String obterType() { return type;}
+    public int obterImageId(){
+        return idImage;
     }
 
     //Desativar Power UP
-    private void desabilitarPower(){
+    public void desabilitarPower(){
         status = false;
     }
 

@@ -1,6 +1,9 @@
 package com.example.memoriegame;
 
 import android.app.Dialog;
+import android.graphics.ColorMatrix;
+import android.graphics.ColorMatrixColorFilter;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -8,7 +11,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.os.Handler;
-import android.os.SystemClock;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,19 +31,25 @@ public class MemorieGame_fg extends Fragment {
 
     private TextView Score;
     private TextView Timer;
-    private int nCartas = 20;
-    private int nPower = 3;
+    private final int nCartas = 16;
+    private  final int nPower = 6;
 
     //CARTAS
-    private int nLimMCards = 32;
-    private int nLimmCards = 8;
+    private final int nLimMCards = 32;
+    private final int nLimmCards = 8;
+
+    private int combo = 0;
+    private int multiplayer = 1;
 
     //OBJ
-    private Cartas[] cartas = new Cartas[nCartas+nPower];
-    private ImageView[] Imagens = new ImageView[nCartas+nPower];
-    private ImageView[] ImagePower =  new ImageView[nPower];
+    private Cartas[] cartas = new Cartas[nCartas+nPower+1];
+    private ImageView[] Imagens = new ImageView[nCartas+nPower+1];
+    private ImageView[] ImagePower =  new ImageView[nPower/2];
+    private PowerUps[] powers = new PowerUps[nPower/2];
 
-    private Integer[] idPowerUps = new Integer[nPower];
+    private String[] Power = {"Tempo","Roda","2x"};
+
+    private int jokerPos = 0;
     private LinearLayout powerDisplay;
 
     //Score
@@ -54,8 +62,6 @@ public class MemorieGame_fg extends Fragment {
     private int pos1Carta, pos2Carta;
     private int nClicks = 0;
 
-    private int totalTime = 100000;
-    private int intervalTime = 10;
 
     private int turno = 0;
     private Handler hand;
@@ -63,9 +69,6 @@ public class MemorieGame_fg extends Fragment {
     private Timer counterTime = new Timer(Integer.MAX_VALUE);
 
 
-    //TimeSpan
-    private long timestampStart = SystemClock.elapsedRealtime();
-    private long timestampLast = SystemClock.elapsedRealtime();
 
     //Funcao //f(x)=((1)/(1+ℯ^(-0.3 (-x+30))))+1 -> funcao logistica max/inicio_x2 - min/fim_x1
     private float declive   = 0.2f;
@@ -114,22 +117,7 @@ public class MemorieGame_fg extends Fragment {
             }
         });
 
-        //
-        powerDisplay = view.findViewById(R.id.powerDisplay);
-
-        //create PowerCElls
-        for(int i =0; i<nPower; i++) {
-            ImagePower[i] = new ImageView(getActivity());
-            int resourceId = getResources().getIdentifier("powerup" + i, "drawable", getActivity().getPackageName());
-
-            ImagePower[i].setImageResource(resourceId);
-            ImagePower[i].setId(View.generateViewId());
-            powerDisplay.addView(ImagePower[i]);
-        }
-
-
-
-
+        loadPower(view);
 
         //Iniciar Timer
         counterTime.iniciarContador();
@@ -151,7 +139,7 @@ public class MemorieGame_fg extends Fragment {
         //shuffle mistura as imagens
         Collections.shuffle(Arrays.asList(cartas));
 
-        getPowerCords();
+        getJokerCord();
 
         for(int i = 0; i < Imagens.length; i++) {
             final int pos = i;
@@ -160,42 +148,28 @@ public class MemorieGame_fg extends Fragment {
             Imagens[i].setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if (nClicks == 0) {
-                            primeiraCarta = cartas[pos].obterIdImage();
+                    Log.d("erororo", nClicks+"");
+                     setCarta(pos);
+                            if (nClicks == 0) {
+                                    if(checkJoker(pos)) {
+                                        mPower();
+                                        posPower=pos;
+                                    }else{
+                                        nClicks++;
+                                    }
 
-                            Imagens[pos].setClickable(false);
-                            cartas[pos].setClicked(true);
-                            pos1Carta=pos;
-                            mostrarCarta(Imagens[pos],cartas[pos].obterIdImage());
 
-                            if(checkPower(pos)) {
-                                mPower();
-                                posPower=pos;
-                            }else{
-                                nClicks++;
+                            } else if (nClicks == 1) {
+                                nClicks = 0;
+                                Log.d("erororo", "pila");
+
+                                if(checkJoker(pos)) {
+                                    posPower=pos;
+                                    mPower();
+                                }else{
+                                    runMec();
+                                }
                             }
-
-
-                    } else if (nClicks == 1) {
-                        pos2Carta = pos;
-                        segundaCarta = cartas[pos].obterIdImage();
-                        Log.d("cega", String.valueOf(segundaCarta));
-
-                        mostrarCarta(Imagens[pos], cartas[pos].obterIdImage());
-                        Imagens[pos].setClickable(false);
-                        cartas[pos].setClicked(true);
-
-                        nClicks = 0;
-
-                        if(checkPower(pos)) {
-                            posPower=pos;
-                            mPower();
-                        }else{
-                            unable();
-                            Handler handler = new Handler();
-                            handler.postDelayed((Runnable) () -> mecanica(), 750);
-                        }
-                    }
                 }
             });
         }
@@ -230,41 +204,28 @@ public class MemorieGame_fg extends Fragment {
         // Usando um ciclo para inicializar os TextViews com findViewById
         int aux  = 1;
         int auxB = 0;
+        int viewImageId = 0;
+        int resourceId = 0;
         String card = "carta";
 
-        for (int i = 0; i < nCartas + nPower; i++) {
+        for (int i = 0; i < nCartas; i++) {
                 //Log.d("int",i+"");
                 //Log.d("id", "imageView" + (i));
+                 Log.d("i",i+"");
 
-                int viewImageId = getResources().getIdentifier("imageView" + (i+1), "id", getActivity().getPackageName());
+                viewImageId = getResources().getIdentifier("imageView" + (i+1), "id", getActivity().getPackageName());
                 Imagens[i] = view.findViewById(viewImageId);
 
                 aux++;
-                if(i%(nCartas/2)==0){
-                    aux=1;
-                }
+                    if(i%(nCartas/2)==0){
+                        aux=1;
+                    }
 
                 Log.d("int",aux+"");
 
                 if (Imagens[i] != null) {
                     Imagens[i].setTag(i);
-                    int resourceId = 0;
-                        //Log.d("tag", i + "");
-                        if(i < nCartas) {
-                            resourceId = getResources().getIdentifier("carta" + aux, "drawable", getActivity().getPackageName());
-                        }else if(i < nCartas + nPower){
-                            Log.d("debug",""+i);
-                            resourceId = getResources().getIdentifier("powerup" + aux, "drawable", getActivity().getPackageName());
-
-                            if(aux==1){
-                                card = "Tempo";
-                            }else if(aux==2){
-                                card = "Roda";
-                            }else{
-                                card = "2x";
-                            }
-                        }
-                        //Log.d("bb", (i % 9) + "");
+                        resourceId = getResources().getIdentifier("carta" + aux, "drawable", getActivity().getPackageName());
 
                         if (resourceId != 0) {
                             cartas[i] = new Cartas(resourceId, i,card);
@@ -275,21 +236,59 @@ public class MemorieGame_fg extends Fragment {
                 }
         }
 
-        /*for(int i=0; i<nPower; i++){
+        aux=0;
 
-        }*/
-    }
+        for (int i = nCartas; i < nCartas+nPower; i++) {
+                Log.d("i",i+"");
+                viewImageId = getResources().getIdentifier("imageView" + (i+1), "id", getActivity().getPackageName());
+                Imagens[i] = view.findViewById(viewImageId);
+                Imagens[i].setTag(i);
 
+                aux++;
+                if((nCartas+nPower/2)==i){
+                    aux=1;
+                }
 
-    private boolean checkPower(int pos){
+                resourceId = 0;
+                Log.d("debug",""+aux);
+                resourceId = getResources().getIdentifier("powerup" + aux, "drawable", getActivity().getPackageName());
+
+                if(aux==1){
+                    card = "Tempo";
+                }else if(aux==2){
+                    card = "Roda";
+                }else{
+                    card = "2x";
+                }
+
+                if (resourceId != 0) {
+                    cartas[i] = new Cartas(resourceId, i,card);
+                    Imagens[i].setImageResource(R.drawable.carta_fundo);
+                    Imagens[i].setClickable(true);
+                }
+            }
+
+                card = "joker";
+                int where = nCartas+nPower+1;
+                Log.d("i",where-1+"");
+
+                viewImageId = getResources().getIdentifier("imageView" + (where), "id", getActivity().getPackageName());
+                Imagens[where-1] = view.findViewById(viewImageId);
+                Imagens[where-1].setTag(where-1);
+                resourceId = getResources().getIdentifier("powerup4", "drawable", getActivity().getPackageName());
+                cartas[where-1] = new Cartas(resourceId, where-1,card);
+                Imagens[where-1].setImageResource(R.drawable.carta_fundo);
+                Imagens[where-1].setClickable(true);
+
+        }
+
+    private boolean checkJoker(int pos){
         boolean power = false;
 
-        for(int i=0; i<idPowerUps.length; i++){
-            if(pos==idPowerUps[i]){
+            if(pos== jokerPos){
                 power=true;
-                break;
             }
-        }
+
         return power;
     }
 
@@ -310,6 +309,7 @@ public class MemorieGame_fg extends Fragment {
     private void mecanica(){
         if(primeiraCarta == segundaCarta){
             turno++;
+            combo++;
             calcScore();
 
             iniciarAnimacao(Imagens[pos1Carta], 1.0f, 0.1f);
@@ -318,10 +318,19 @@ public class MemorieGame_fg extends Fragment {
             cartas[pos1Carta].desativar();
             cartas[pos2Carta].desativar();
 
+            for(int i = 0; i<Power.length; i++){
+                if(Power[i] == cartas[pos1Carta].obterType() && powers[i].obterType() == Power[i]){
+                    powers[i].ativarPower();
+                    updateSat(ImagePower[i],1.f, powers[i].obterImageId());
+                }
+            }
+
             enable();
             Score.setText(String.valueOf(score));
         }else{
+            combo = 0;
             turno++;
+            multiplayer = 1;
             ocultarCarta(Imagens[pos1Carta],R.drawable.carta_fundo);
             ocultarCarta(Imagens[pos2Carta],R.drawable.carta_fundo);
             enable();
@@ -339,6 +348,9 @@ public class MemorieGame_fg extends Fragment {
         if(posPower!=pos1Carta){
             ocultarCarta(Imagens[pos1Carta],R.drawable.carta_fundo);
         }
+
+        score-=10;
+        Score.setText(String.valueOf(score));
 
         turno++;
         cartas[posPower].desativar();
@@ -372,13 +384,12 @@ public class MemorieGame_fg extends Fragment {
         return aux;
     }
 
-    private void getPowerCords(){
+    private void getJokerCord(){
         int a = 0;
 
         for(int i = 0; i<Imagens.length; i++){
-            if(cartas[i].obterType()!="carta") {
-                idPowerUps[a] = i;
-                a++;
+            if(cartas[i].obterType()=="joker") {
+                jokerPos = i;
             }
         }
     }
@@ -386,9 +397,14 @@ public class MemorieGame_fg extends Fragment {
     private void calcScore(){
         //f(x)=((2)/(1+ℯ^(-0.3 (-x+30))))
         float x = counterTime.getTempoAtual();
-        float mult = (float) ((salto)/(1 + Math.pow(Math.E,(-1*declive)*(-x+transHori)))+transVert);
-        float pulo = (float) (((90)/(1 + Math.pow(Math.E,(-0.2f)*(-turno+30))))+10); //70 jogadas devolve 10pts
-        score += (int) pulo * mult;
+        float mult = logistica(1f,-0.2f,counterTime.getTempoAtual(),30f,1f);
+        float pulo = logistica(90,-0.2f,-1*turno,30,10);
+        score += (int) (pulo * mult)*multiplayer;
+    }
+
+    private float logistica(float salto , float declive, float x, float transH, float transV){
+        float value = (float) ((salto)/(1 + Math.pow(Math.E,(declive)*(-x+transH)))+transV);
+        return value;
     }
 
     private void exibirDialog() {
@@ -490,9 +506,116 @@ public class MemorieGame_fg extends Fragment {
 
         Collections.shuffle(Arrays.asList(cartas));
 
-        getPowerCords();
+        getJokerCord();
+
+        for(int i = 1; i<=(nPower/2); i++) {
+            ImagePower[i].setAlpha(1f);
+            powers[i].ativarPower();
+            ImagePower[i].setClickable(true);
+            updateSat(ImagePower[i],0.f, powers[i].obterImageId());
+        }
 
         Log.d("restart","restart");
+    }
+
+    private void loadPower(View view){
+        int resourceId = 0 ;
+
+
+            for(int i = 1; i<=(nPower/2); i++) {
+                resourceId = getResources().getIdentifier("imageViewPower" + i, "id", getActivity().getPackageName());
+                if(resourceId != 0) {
+                    ImagePower[i - 1] = view.findViewById(resourceId);
+                    ImagePower[i - 1].setTag(i);
+
+                    int idDraw = setSat( ImagePower[i - 1]);
+                    updateSat(ImagePower[i - 1], 0.f,idDraw);
+
+                    powers[i-1] = new PowerUps(Power[i-1], i,idDraw);
+                    int posP = i-1;
+                            ImagePower[i - 1].setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    if(powers[posP].getStatus()) {
+                                        if (1 == (int) ImagePower[posP].getTag()) {
+                                            counterTime.reduceTime(5);
+                                            iniciarAnimacao(ImagePower[posP],1f,0.1f);
+                                        } else if (2 == (int) ImagePower[posP].getTag() && nClicks==1) {
+                                            findCard();
+                                            nClicks = 0;
+                                            iniciarAnimacao(ImagePower[posP],1f,0.1f);
+                                        } else if (3 == (int) ImagePower[posP].getTag()) {
+                                            multiplayer = 2;
+                                            iniciarAnimacao(ImagePower[posP],1f,0.1f);
+                                        }
+                                        ImagePower[posP].setClickable(false);
+                                        powers[posP].desabilitarPower();
+                                    }
+                                }
+                            });
+                }
+            }
+        }
+
+        private void findCard(){
+            int fundPos = 0;
+
+            for(int i = 0; i<cartas.length; i++){
+                if(cartas[i].obterIdImage() == primeiraCarta && cartas[i].obterId() != cartas[pos1Carta].obterId()){
+                    fundPos = i;
+                }
+            }
+
+            Log.d("cartasID",cartas[fundPos].obterId()+","+cartas[pos1Carta].obterId());
+
+            setCarta(fundPos);
+            runMec();
+        }
+
+        private void runMec(){
+            unable();
+            Handler handler = new Handler();
+            handler.postDelayed((Runnable) () -> mecanica(), 750);
+        }
+
+        private void setCarta(int pos){
+            if(nClicks==0){
+                pos1Carta = pos;
+                nClicks = 0;
+                primeiraCarta = cartas[pos].obterIdImage();
+            }else if(nClicks==1){
+                pos2Carta = pos;
+                segundaCarta = cartas[pos].obterIdImage();
+                Log.d("erororo", "picha");
+            }
+            Imagens[pos].setClickable(false);
+            cartas[pos].setClicked(true);
+            mostrarCarta(Imagens[pos],cartas[pos].obterIdImage());
+        }
+
+
+    private int setSat(ImageView image){
+        int resourceDraw = 0;
+        int i  = (int) image.getTag();
+
+        // Obtenha o Drawable do XML
+        resourceDraw = getResources().getIdentifier("powerup" + i +"_d", "drawable", getActivity().getPackageName());
+
+        return resourceDraw;
+    }
+
+    private void updateSat(ImageView image,float sat,int id){
+        Drawable drawable = getResources().getDrawable(id);
+
+        float saturacaoDesejada = sat;
+
+        ColorMatrix colorMatrix = new ColorMatrix();
+        colorMatrix.setSaturation(saturacaoDesejada);
+
+        ColorMatrixColorFilter colorFilter = new ColorMatrixColorFilter(colorMatrix);
+        drawable.setColorFilter(colorFilter);
+
+        image.setImageDrawable(drawable);
     }
 
 

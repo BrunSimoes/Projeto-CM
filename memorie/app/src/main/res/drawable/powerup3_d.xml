@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Aqui, você pode definir outros elementos do drawable, como uma imagem ou forma -->
+    <item android:drawable="@drawable/powerup3_3" />
+</layer-list>
