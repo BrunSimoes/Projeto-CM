@@ -18,6 +18,7 @@ import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.Arrays;
@@ -38,8 +39,10 @@ public class MemorieGame_fg extends Fragment {
     //OBJ
     private Cartas[] cartas = new Cartas[nCartas+nPower];
     private ImageView[] Imagens = new ImageView[nCartas+nPower];
+    private ImageView[] ImagePower =  new ImageView[nPower];
 
     private Integer[] idPowerUps = new Integer[nPower];
+    private LinearLayout powerDisplay;
 
     //Score
     private int score = 0;
@@ -110,6 +113,23 @@ public class MemorieGame_fg extends Fragment {
                 exibirDialog2();
             }
         });
+
+        //
+        powerDisplay = view.findViewById(R.id.powerDisplay);
+
+        //create PowerCElls
+        for(int i =0; i<nPower; i++) {
+            ImagePower[i] = new ImageView(getActivity());
+            int resourceId = getResources().getIdentifier("powerup" + i, "drawable", getActivity().getPackageName());
+
+            ImagePower[i].setImageResource(resourceId);
+            ImagePower[i].setId(View.generateViewId());
+            powerDisplay.addView(ImagePower[i]);
+        }
+
+
+
+
 
         //Iniciar Timer
         counterTime.iniciarContador();

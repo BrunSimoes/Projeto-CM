@@ -417,42 +417,14 @@
                 tools:layout_editor_absoluteY="65dp" />
 
             <LinearLayout
+                android:id="@+id/powerDisplay"
                 android:layout_width="239dp"
                 android:layout_height="90dp"
                 android:background="#2F806F"
                 android:orientation="horizontal"
                 android:radius="20px"
                 tools:layout_editor_absoluteX="0dp"
-                tools:layout_editor_absoluteY="9dp">
-
-                <ImageView
-                    android:id="@+id/imagePower1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="4dp"
-                    android:layout_marginEnd="4dp"
-                    android:layout_weight="1"
-                    android:src="@drawable/carta_fundo" />
-
-                <ImageView
-                    android:id="@+id/imagePower2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="4dp"
-                    android:layout_marginEnd="4dp"
-                    android:layout_weight="1"
-                    android:src="@drawable/carta_fundo" />
-
-                <ImageView
-                    android:id="@+id/imagePower3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="4dp"
-                    android:layout_marginEnd="4dp"
-                    android:layout_weight="1"
-                    android:src="@drawable/carta_fundo" />
-
-            </LinearLayout>
+                tools:layout_editor_absoluteY="9dp"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

@@ -181,7 +181,7 @@ public class fragment_register extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         usernameCreate = view.findViewById(R.id.usernameCreate);
-        emailCreate = view.findViewById(R.id.emailCreate);
+        emailCreate = view.findViewById(R.id.email);
         PasswordCreate[0] = view.findViewById(R.id.passwordCreate);
         PasswordCreate[1] = view.findViewById(R.id.passwordCreateConfirm);
 
