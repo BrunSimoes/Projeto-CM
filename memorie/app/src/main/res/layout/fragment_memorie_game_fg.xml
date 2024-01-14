@@ -23,59 +23,37 @@
             app:layout_constraintTop_toTopOf="parent">
 
 
+            <!--botao para ir menu ou sair do jogo--> <!--botao para ir menu ou sair do jogo-->
 
-            <TextView
-                android:id="@+id/TimerText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="88dp"
-                android:layout_marginTop="72dp"
-                android:text="TextView"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:fontFamily="@font/font_titulo" />
+            <!--display do nivel -->
 
             <TextView
                 android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="100dp"
-                android:layout_marginTop="44dp"
+                android:layout_marginStart="88dp"
+                android:layout_marginTop="8dp"
                 android:text="Timer"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/TimerText" />
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout4" />
 
             <TextView
                 android:id="@+id/textView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="96dp"
-                android:layout_marginTop="44dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="88dp"
                 android:text="Score"
-                app:layout_constraintStart_toEndOf="@+id/textView"
-                app:layout_constraintTop_toBottomOf="@+id/ScoreText" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout3" />
 
-            <TextView
-                android:id="@+id/ScoreText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="80dp"
-                android:layout_marginTop="72dp"
-                android:text="TextView"
-                app:layout_constraintStart_toEndOf="@+id/TimerText"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <!--botao para ir menu ou sair do jogo--> <!--botao para ir menu ou sair do jogo-->
-
-            <!--display do nivel -->
             <ImageButton
                 android:id="@+id/popupButton"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="16dp"
                 android:background="@drawable/rounded_button"
-                android:onClick="showPopupMenu"
                 android:padding="5dp"
                 android:src="@drawable/baseline_menu_24"
                 app:layout_constraintStart_toStartOf="parent"
@@ -85,35 +63,84 @@
                 android:id="@+id/textView3"
                 android:layout_width="142dp"
                 android:layout_height="45dp"
-                android:background="@drawable/rounded_button"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/half_rounded_button"
                 android:gravity="center"
                 android:text="Round 3"
                 android:textColor="#FCF3ED"
                 android:textSize="60px"
-                tools:layout_editor_absoluteX="293dp"
-                tools:layout_editor_absoluteY="24dp" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout4"
+                android:layout_width="133dp"
+                android:layout_height="57dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="60dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/TimerText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/font_titulo"
+                    android:text="TextView"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout3"
+                android:layout_width="136dp"
+                android:layout_height="58dp"
+                android:layout_marginTop="60dp"
+                android:layout_marginEnd="40dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/ScoreText"
+                    android:layout_width="62dp"
+                    android:layout_height="16dp"
+                    android:text="TextView"
+                    android:textAlignment="center"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/tabuleiro"
-            android:layout_width="wrap_content"
-            android:layout_height="400dp"
-            android:layout_marginTop="130px"
+            android:layout_width="407dp"
+            android:layout_height="441dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="2dp"
+            app:layout_constraintBottom_toTopOf="@+id/powerUpMenu"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/header"
-            tools:layout_editor_absoluteX="0dp">
+            app:layout_constraintVertical_bias="0.0">
 
             <!-- linha 1  -->
+
             <LinearLayout
                 android:id="@+id/linearLayout"
                 android:layout_width="410dp"
                 android:layout_height="100dp"
+                android:layout_marginTop="4dp"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
 
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
@@ -178,7 +205,9 @@
                 android:layout_width="410dp"
                 android:layout_height="100dp"
                 android:orientation="horizontal"
-                tools:layout_editor_absoluteY="100dp">
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
                 <ImageView
                     android:id="@+id/imageView7"
@@ -239,7 +268,10 @@
                 android:id="@+id/linearLayout3"
                 android:layout_width="410dp"
                 android:layout_height="100dp"
+                android:layout_marginTop="4dp"
                 android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
 
                 <ImageView
@@ -297,16 +329,81 @@
                     android:src="@drawable/carta_fundo" />
 
             </LinearLayout>
+
+            <!--<LinearLayout
+                android:id="@+id/linearLayout4"
+                android:layout_width="410dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="4dp"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
+                tools:layout_editor_absoluteX="-2dp">
+
+                <ImageView
+                    android:id="@+id/imageView13"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="4dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/carta_fundo" />
+
+                <ImageView
+                    android:id="@+id/imageView14"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginEnd="4dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/carta_fundo" />
+
+                <ImageView
+                    android:id="@+id/imageView15"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginEnd="4dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/carta_fundo" />
+
+                <ImageView
+                    android:id="@+id/imageView16"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginEnd="4dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/carta_fundo" />
+
+                <ImageView
+                    android:id="@+id/imageView17"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginEnd="4dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/carta_fundo" />
+
+                <ImageView
+                    android:id="@+id/imageView18"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/carta_fundo" />
+
+            </LinearLayout>-->
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/powerUpMenu"
-            android:layout_width="409dp"
-            android:layout_height="112dp"
-            android:layout_marginTop="1dp"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tabuleiro"
-            tools:layout_editor_absoluteX="1dp">
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
 
             <TextView
                 android:id="@+id/textView5"
@@ -317,13 +414,13 @@
                 tools:layout_editor_absoluteY="11dp" />
 
             <LinearLayout
-                android:layout_width="250dp"
-                android:layout_height="60dp"
+                android:layout_width="343dp"
+                android:layout_height="69dp"
+                android:background="#2F806F"
                 android:orientation="horizontal"
-                tools:layout_editor_absoluteX="1dp"
                 android:radius="20px"
-                tools:layout_editor_absoluteY="31dp"
-                android:background="#2F806F"></LinearLayout>
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="30dp"></LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

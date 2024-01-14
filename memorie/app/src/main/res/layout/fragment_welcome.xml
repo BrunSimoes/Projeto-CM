@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#E0EEEB"
+    tools:layout_editor_absoluteX="16dp"
+    tools:layout_editor_absoluteY="345dp">
+
+    <!-- Button -->
+
+    <!-- ImageView 1 -->
+
+    <!-- ImageView 2 -->
+
+    <!-- ImageView 3 -->
+
+    <Button
+        android:id="@+id/play_button"
+        android:layout_width="160dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="176dp"
+        android:backgroundTint="#2F806F"
+        android:text="let's play!"
+        android:textColor="@color/branco_sujo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <!--cartas canto esquerdo inferior -->
+
+    <ImageView
+        android:layout_width="136dp"
+        android:layout_height="234dp"
+        android:layout_marginTop="532dp"
+        android:rotation="10"
+        android:src="@drawable/carta_fundo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="136dp"
+        android:layout_height="234dp"
+        android:layout_marginTop="584dp"
+        android:rotation="40"
+        android:src="@drawable/carta_fundo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.178"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:layout_width="136dp"
+        android:layout_height="234dp"
+        android:layout_marginTop="544dp"
+        android:rotation="50"
+        android:src="@drawable/carta8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- cartas lado direito centro-->
+
+    <ImageView
+        android:layout_width="136dp"
+        android:layout_height="234dp"
+        android:layout_marginTop="260dp"
+        android:rotation="-50"
+        android:src="@drawable/carta_fundo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:layout_width="136dp"
+        android:layout_height="234dp"
+        android:layout_marginTop="148dp"
+        android:rotation="-10"
+        android:src="@drawable/carta_fundo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:layout_width="136dp"
+        android:layout_height="234dp"
+        android:layout_marginTop="200dp"
+        android:rotation="-30"
+        android:src="@drawable/carta4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Logo texto -->
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="26dp"
+        android:layout_marginTop="16dp"
+        android:text="Memory \nFlush"
+        android:textColor="@color/azul_escuro"
+        android:textSize="50sp"
+        app:layout_constraintBottom_toTopOf="@+id/play_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Card Game"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        app:layout_constraintTop_toBottomOf="@+id/textView6"
+        tools:layout_editor_absoluteX="26dp" />
+
+    <!--cartas no top superior esquerdo-->
+
+    <ImageView
+        android:layout_width="136dp"
+        android:layout_height="234dp"
+        android:layout_marginEnd="340dp"
+        android:layout_marginBottom="588dp"
+        android:rotation="-50"
+        android:src="@drawable/carta_fundo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageView
+        android:layout_width="136dp"
+        android:layout_height="234dp"
+        android:layout_marginBottom="612dp"
+        android:rotation="-10"
+        android:src="@drawable/carta_fundo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.13"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
