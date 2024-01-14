@@ -21,6 +21,8 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import android.util.Log;
@@ -63,6 +65,15 @@ public class fragment_leaderboard extends Fragment {
                                 leaderboardEntries.add(new LeaderboardEntry(scoreEntry.getEmail(), scoreEntry.getScore()));
                             }
 
+                            // Sort leaderboardEntries by descending score
+                            Collections.sort(leaderboardEntries, new Comparator<LeaderboardEntry>() {
+                                @Override
+                                public int compare(LeaderboardEntry entry1, LeaderboardEntry entry2) {
+                                    // Compare in descending order
+                                    return Integer.compare(entry2.getScore(), entry1.getScore());
+                                }
+                            });
+
                             if (adapter != null) {
                                 adapter.notifyDataSetChanged();
                             }
@@ -93,7 +104,7 @@ public class fragment_leaderboard extends Fragment {
         rounds = view.findViewById(R.id.rounds);
         rounds.setOnClickListener( (v) -> {
             getFragmentManager().beginTransaction()
-                    .replace(R.id.fragment, fragment_rounds.class, null)
+                    .replace(R.id.fragment, new fragment_rounds())
                     .commit();
         });
     }
