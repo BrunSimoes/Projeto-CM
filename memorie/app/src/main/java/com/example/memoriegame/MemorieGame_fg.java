@@ -1,5 +1,6 @@
 package com.example.memoriegame;
 
+import android.animation.ObjectAnimator;
 import android.app.Dialog;
 import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
@@ -536,20 +537,31 @@ public class MemorieGame_fg extends Fragment {
                             ImagePower[i - 1].setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
+                                    boolean ui = false;
                                     if(powers[posP].getStatus()) {
                                         if (1 == (int) ImagePower[posP].getTag()) {
                                             counterTime.reduceTime(5);
-                                            iniciarAnimacao(ImagePower[posP],1f,0.1f);
-                                        } else if (2 == (int) ImagePower[posP].getTag() && nClicks==1) {
-                                            findCard();
-                                            nClicks = 0;
-                                            iniciarAnimacao(ImagePower[posP],1f,0.1f);
-                                        } else if (3 == (int) ImagePower[posP].getTag()) {
+                                            iniciarAnimacao(ImagePower[posP], 1f, 0.1f);
+                                        }
+
+                                        if (2 == (int) ImagePower[posP].getTag() && nClicks==1) {
+                                        findCard();
+                                        nClicks = 0;
+                                        iniciarAnimacao(ImagePower[posP], 1f, 0.1f);
+                                        }else{
+                                            iniciarAnimacao2(ImagePower[posP], 1f, 0.1f);
+                                            ui=true;
+                                        }
+
+                                        if (3 == (int) ImagePower[posP].getTag()) {
                                             multiplayer = 2;
                                             iniciarAnimacao(ImagePower[posP],1f,0.1f);
                                         }
-                                        ImagePower[posP].setClickable(false);
-                                        powers[posP].desabilitarPower();
+                                        
+                                        if(!ui) {
+                                            ImagePower[posP].setClickable(false);
+                                            powers[posP].desabilitarPower();
+                                        }
                                     }
                                 }
                             });
@@ -640,5 +652,12 @@ public class MemorieGame_fg extends Fragment {
         });
 
         elemento.startAnimation(animacao);
+    }
+
+    private void iniciarAnimacao2(ImageView elemento, float inicial, float fin) {
+        ObjectAnimator rotationAnimator = ObjectAnimator.ofFloat(elemento, "rotation", 0f, 5f, 0f, -5f, 0f);
+        rotationAnimator.setDuration(100);
+        rotationAnimator.setRepeatCount(0);
+        rotationAnimator.start();
     }
 }
