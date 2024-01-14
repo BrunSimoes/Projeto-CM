@@ -123,8 +123,8 @@ public class MemorieGame_fg extends Fragment {
 
         cartas = new Cartas[nCartas+nPower+jokerAtive];
         Imagens = new ImageView[nCartas+nPower+jokerAtive];
-        ImagePower =  new ImageView[nPower/2];
-        powers = new PowerUps[nPower/2];
+        ImagePower =  new ImageView[3];
+        powers = new PowerUps[3];
 
         Log.d("nCards",String.valueOf(nCartas));
         Log.d("nPowerUps",String.valueOf(nPower));
@@ -634,49 +634,52 @@ public class MemorieGame_fg extends Fragment {
         int resourceId = 0 ;
 
 
-            for(int i = 1; i<=(nPower/2); i++) {
+            for(int i = 1; i<=3; i++) {
                 resourceId = getResources().getIdentifier("imageViewPower" + i, "id", getActivity().getPackageName());
                 if(resourceId != 0) {
                     ImagePower[i - 1] = view.findViewById(resourceId);
                     ImagePower[i - 1].setTag(i);
+                    if(i<=nPower/2) {
+                        int idDraw = setSat(ImagePower[i - 1]);
+                        updateSat(ImagePower[i - 1], 0.f, idDraw);
 
-                    int idDraw = setSat( ImagePower[i - 1]);
-                    updateSat(ImagePower[i - 1], 0.f,idDraw);
+                        powers[i - 1] = new PowerUps(Power[i - 1], i, idDraw);
+                        int posP = i - 1;
+                        ImagePower[i - 1].setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                boolean ui = false;
+                                if (powers[posP].getStatus()) {
+                                    if (1 == (int) ImagePower[posP].getTag()) {
+                                        counterTime.reduceTime(5);
+                                        iniciarAnimacao(ImagePower[posP], 1f, 0.1f);
+                                    }
 
-                    powers[i-1] = new PowerUps(Power[i-1], i,idDraw);
-                    int posP = i-1;
-                            ImagePower[i - 1].setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-                                    boolean ui = false;
-                                    if(powers[posP].getStatus()) {
-                                        if (1 == (int) ImagePower[posP].getTag()) {
-                                            counterTime.reduceTime(5);
-                                            iniciarAnimacao(ImagePower[posP], 1f, 0.1f);
-                                        }
-
-                                        if (2 == (int) ImagePower[posP].getTag() && nClicks==1) {
+                                    if (2 == (int) ImagePower[posP].getTag() && nClicks == 1) {
                                         findCard();
                                         nClicks = 0;
                                         iniciarAnimacao(ImagePower[posP], 1f, 0.1f);
-                                        }else{
-                                            iniciarAnimacao2(ImagePower[posP], 1f, 0.1f);
-                                            ui=true;
-                                        }
+                                    } else {
+                                        iniciarAnimacao2(ImagePower[posP], 1f, 0.1f);
+                                        ui = true;
+                                    }
 
-                                        if (3 == (int) ImagePower[posP].getTag()) {
-                                            multiplayer = 2;
-                                            Multipler.setText("x" + String.valueOf(multiplayer));
-                                            iniciarAnimacao(ImagePower[posP],1f,0.1f);
-                                        }
+                                    if (3 == (int) ImagePower[posP].getTag()) {
+                                        multiplayer = 2;
+                                        Multipler.setText("x" + String.valueOf(multiplayer));
+                                        iniciarAnimacao(ImagePower[posP], 1f, 0.1f);
+                                    }
 
-                                        if(!ui) {
-                                            ImagePower[posP].setClickable(false);
-                                            powers[posP].desabilitarPower();
-                                        }
+                                    if (!ui) {
+                                        ImagePower[posP].setClickable(false);
+                                        powers[posP].desabilitarPower();
                                     }
                                 }
-                            });
+                            }
+                        });
+                    }else{
+                        ImagePower[i - 1].setVisibility(View.INVISIBLE);
+                    }
                 }
             }
         }

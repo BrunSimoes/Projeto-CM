@@ -69,7 +69,7 @@ public class fragment_rounds extends Fragment {
                     .replace(R.id.fragment, MemorieGame_fg.class, null)
                     .commit();
         });
-        round3 = view.findViewById(R.id.round4);
+        round3 = view.findViewById(R.id.round3);
         round3.setOnClickListener( (v) -> {
 
             sessionManager.setNJoca("1");
@@ -82,7 +82,7 @@ public class fragment_rounds extends Fragment {
                     .replace(R.id.fragment, MemorieGame_fg.class, null)
                     .commit();
         });
-        round4 = view.findViewById(R.id.round3);
+        round4 = view.findViewById(R.id.round4);
         round4.setOnClickListener( (v) -> {
 
             sessionManager.setNJoca("1");
