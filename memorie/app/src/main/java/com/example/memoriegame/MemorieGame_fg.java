@@ -463,8 +463,8 @@ public class MemorieGame_fg extends Fragment {
         dialog.setContentView(R.layout.menu_dialog);
 
         //Load Buttons
-        Button restart = dialog.findViewById(R.id.button1);
-        Button exit    = dialog.findViewById(R.id.button);
+        Button restart = dialog.findViewById(R.id.button);
+        Button exit    = dialog.findViewById(R.id.button1);
 
         exit.setOnClickListener(new View.OnClickListener() {
             @Override
