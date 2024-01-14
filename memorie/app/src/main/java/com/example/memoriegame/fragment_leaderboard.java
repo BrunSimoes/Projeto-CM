@@ -61,11 +61,9 @@ public class fragment_leaderboard extends Fragment {
                                 leaderboardEntries.add(new LeaderboardEntry(scoreEntry.getEmail(), scoreEntry.getScore()));
                             }
 
-                            // Sort leaderboardEntries by descending score
                             Collections.sort(leaderboardEntries, new Comparator<LeaderboardEntry>() {
                                 @Override
                                 public int compare(LeaderboardEntry entry1, LeaderboardEntry entry2) {
-                                    // Compare in descending order
                                     return Integer.compare(entry2.getScore(), entry1.getScore());
                                 }
                             });

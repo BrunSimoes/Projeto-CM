@@ -71,8 +71,10 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
             android:layout_marginTop="8dp"
+            android:fontFamily="@font/font_normal"
             android:text="Time"
             android:textColor="@color/white"
+            android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textScore" />
 
@@ -81,8 +83,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
+            android:fontFamily="@font/font_normal"
             android:text="Score"
             android:textColor="@color/white"
+            android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -92,8 +96,10 @@
             android:layout_height="22dp"
             android:layout_marginStart="38dp"
             android:layout_marginTop="16dp"
+            android:fontFamily="@font/font_normal"
             android:text="TextView"
             android:textColor="@color/white"
+            android:textSize="16sp"
             app:layout_constraintStart_toEndOf="@+id/textScore"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -103,8 +109,10 @@
             android:layout_height="21dp"
             android:layout_marginStart="36dp"
             android:layout_marginTop="4dp"
+            android:fontFamily="@font/font_normal"
             android:text="TextView"
             android:textColor="@color/white"
+            android:textSize="16sp"
             app:layout_constraintStart_toEndOf="@+id/textTime"
             app:layout_constraintTop_toBottomOf="@+id/textScoreWrite" />
 
@@ -124,9 +132,11 @@
             android:layout_width="177dp"
             android:layout_height="24dp"
             android:layout_marginTop="4dp"
+            android:fontFamily="@font/font_normal"
             android:text="Game Over!"
-            android:textColor="@color/white"
             android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -136,9 +146,11 @@
             android:layout_width="177dp"
             android:layout_height="24dp"
             android:layout_marginTop="7dp"
+            android:fontFamily="@font/font_normal"
             android:text="Round 4"
-            android:textColor="@color/white"
             android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textGameOver" />
