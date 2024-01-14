@@ -174,7 +174,6 @@ public class MemorieGame_fg extends Fragment {
                 }
             });
         }
-
     }
 
     private void mostrarCarta(ImageView iV, int id){
@@ -426,8 +425,8 @@ public class MemorieGame_fg extends Fragment {
         Challenge.setText("Challenge " + 1);
 
         //Load Buttons
-        Button restart = dialog.findViewById(R.id.button);
-        Button exit    = dialog.findViewById(R.id.button2);
+        Button restart = dialog.findViewById(R.id.button2);
+        Button exit    = dialog.findViewById(R.id.button);
 
         restart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -441,6 +440,10 @@ public class MemorieGame_fg extends Fragment {
             public void onClick(View v) {
                 restartAll();
                 dialog.dismiss();
+
+                getFragmentManager().beginTransaction()
+                        .replace(R.id.fragment, fragment_rounds.class, null)
+                        .commit();
             }
         });
 
@@ -449,6 +452,7 @@ public class MemorieGame_fg extends Fragment {
 
         // Exibe o diálogo
         dialog.show();
+
     }
 
     private void exibirDialog2() {
@@ -466,6 +470,10 @@ public class MemorieGame_fg extends Fragment {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
+
+                getFragmentManager().beginTransaction()
+                        .replace(R.id.fragment, fragment_rounds.class, null)
+                        .commit();
             }
         });
 

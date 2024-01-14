@@ -130,7 +130,7 @@ public class fragment_login extends Fragment {
                             sessionManager.setUserEmail(email);
                             for (DocumentSnapshot document : task.getResult()) {
                                 getFragmentManager().beginTransaction()
-                                        .replace(R.id.fragment, MemorieGame_fg.class, null)
+                                        .replace(R.id.fragment, fragment_rounds.class, null)
                                         .commit();
                             }
                         }

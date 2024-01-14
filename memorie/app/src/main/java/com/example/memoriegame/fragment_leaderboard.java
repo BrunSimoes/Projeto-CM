@@ -28,10 +28,11 @@ import android.util.Log;
 import android.content.Context;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
-
+import android.widget.Button;
 
 public class fragment_leaderboard extends Fragment {
+
+    Button rounds;
 
     private static FirebaseFirestore db = FirebaseFirestore.getInstance();
     private static final String TAG = "FirestoreExample";
@@ -87,6 +88,14 @@ public class fragment_leaderboard extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         adapter = new LeaderboardAdapter(leaderboardEntries);
         recyclerView.setAdapter(adapter);
+
+        //MUDAR PARA ROUNDS
+        rounds = view.findViewById(R.id.rounds);
+        rounds.setOnClickListener( (v) -> {
+            getFragmentManager().beginTransaction()
+                    .replace(R.id.fragment, fragment_rounds.class, null)
+                    .commit();
+        });
     }
 
     private static class ScoreEntry {
