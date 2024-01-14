@@ -15,7 +15,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             "CREATE TABLE users (id INTEGER PRIMARY KEY AUTOINCREMENT, email TEXT, username TEXT, password TEXT);";
 
     private static final String createScores =
-            "CREATE TABLE scores (id INTEGER PRIMARY KEY AUTOINCREMENT, user TEXT, level TEXT, score TEXT, FOREIGN KEY(user) REFERENCES users(id));";
+            "CREATE TABLE scores (user TEXT, level TEXT, score TEXT);";
 
 
     public DatabaseHelper(Context context) {
@@ -24,8 +24,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(createScores);
         db.execSQL(createUsers);
+        db.execSQL(createScores);
     }
 
     @Override
@@ -41,16 +41,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put("username", username);
         values.put("password", password);
 
-        // Inserting the new user into the 'users' table
         long result = db.insert("users", null, values);
 
         // Check if the insertion was successful
         if (result != -1) {
             // User registered successfully
-            // You can add further actions or log messages here if needed
         } else {
             // Registration failed
-            // You can handle the failure scenario here
         }
 
         db.close();
@@ -64,16 +61,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put("level", level);
         values.put("score", score);
 
-        // Inserting the new user into the 'users' table
-        long result = db.insert("users", null, values);
-
-        // Check if the insertion was successful
+        long result = db.insert("scores", null, values);
         if (result != -1) {
-            // User registered successfully
-            // You can add further actions or log messages here if needed
         } else {
-            // Registration failed
-            // You can handle the failure scenario here
         }
 
         db.close();

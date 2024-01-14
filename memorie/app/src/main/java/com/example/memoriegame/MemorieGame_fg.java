@@ -41,6 +41,9 @@ public class MemorieGame_fg extends Fragment {
     //Score
     private int score = 0;
 
+    //Nivel
+    private int nivel = 3;
+
     private int primeiraCarta, segundaCarta = 0;
     private int pos1Carta, pos2Carta;
     private int nClicks = 0;
@@ -70,10 +73,14 @@ public class MemorieGame_fg extends Fragment {
     private ImageButton hamButton;
 
 
+    //SESSION MANAGER
+    private SessionManager sessionManager;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        sessionManager = new SessionManager(requireContext());
     }
 
     @Override
@@ -268,7 +275,9 @@ public class MemorieGame_fg extends Fragment {
             enable();
         }
 
+        String userEmail = sessionManager.getUserEmail();
         if(checkOver()){
+            firebaseData.uploadScore(userEmail, nivel, score);
             exibirDialog();
             Log.d("Status","Game Over!");
         }

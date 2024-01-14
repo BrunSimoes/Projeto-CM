@@ -121,7 +121,7 @@ public class fragment_login extends Fragment {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             sessionManager.setLoggedIn(true);
-                            sessionManager.setUserId(email);
+                            sessionManager.setUserEmail(email);
                             for (DocumentSnapshot document : task.getResult()) {
                                 getFragmentManager().beginTransaction()
                                         .replace(R.id.fragment, MemorieGame_fg.class, null)
@@ -154,7 +154,6 @@ public class fragment_login extends Fragment {
 
         registerRed = view.findViewById(R.id.registerRed);
 
-        //usernameLog = view.findViewById(R.id.email);
         emailLog = view.findViewById(R.id.email);
         PasswordLog = view.findViewById(R.id.password);
 

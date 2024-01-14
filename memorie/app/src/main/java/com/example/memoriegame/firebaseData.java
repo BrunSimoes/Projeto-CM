@@ -23,12 +23,10 @@ public class firebaseData {
         this.db = db;
     }
 
-
-
     //UPLOAD DATA FUNCTIONS
-    public static void uploadScore(int userId, String level, String score) {
+    public static void uploadScore(String username, int level, int score) {
         Map<String, Object> scoreMap = new HashMap<>();
-        scoreMap.put("userId", userId);
+        scoreMap.put("username", username);
         scoreMap.put("level", level);
         scoreMap.put("score", score);
 
@@ -45,8 +43,6 @@ public class firebaseData {
 
 
     //GET DATA FUNCTIONS
-
-    //REVER ESTA FUNCAO!!!!!
     static void getAllScores() {
         db.collection("scores")
                 .get()
@@ -54,18 +50,20 @@ public class firebaseData {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
-                            List<String> userDataList = new ArrayList<>();
 
+                            List<String> scoreDataList = new ArrayList<>();
                             for (DocumentSnapshot document : task.getResult()) {
-                                String title = document.getString("title");
-                                String description = document.getString("description");
+                                String email = document.getString("user");
+                                String level = document.getString("level");
+                                String score = document.getString("score");
 
-                                userDataList.add("Title: " + title + ", Description: " + description);
+                                scoreDataList.add("email: " + email + ", level: " + level + ", score: " + score);
                             }
 
-                            for (String userData : userDataList) {
-                                Log.d("FirestoreData", userData);
+                            for (String scoreData : scoreDataList) {
+                                Log.d("FirestoreData", scoreData);
                             }
+
                         } else {
                             Log.w("FirestoreData", "Error getting documents.", task.getException());
                         }
