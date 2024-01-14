@@ -8,7 +8,10 @@
     android:scaleType="centerCrop"
     android:background="#E0EEEB">
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 6e54093d364a7de7e4ba30ab24dc3a98f34f6f77
     <com.google.android.material.button.MaterialButton
         android:id="@+id/registCreate"
         android:layout_width="140dp"
@@ -18,16 +21,25 @@
         android:layout_marginTop="3dp"
         android:layout_marginEnd="48dp"
         android:layout_marginBottom="48dp"
+<<<<<<< HEAD
         android:backgroundTint="#2F806F"
         android:text="register"
         android:textColor="#ffffff"
         android:textSize="18dp"
         app:cornerRadius="32dp"
+=======
+        android:text="Register"
+        android:textColor="#ffffff"
+        android:textSize="18dp"
+        app:cornerRadius="32dp"
+        android:backgroundTint="#2F806F"
+>>>>>>> 6e54093d364a7de7e4ba30ab24dc3a98f34f6f77
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+<<<<<<< HEAD
         app:layout_constraintVertical_bias="1.0" />
 
     <EditText
@@ -46,12 +58,17 @@
         app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/passwordCreate" />
+=======
+        app:layout_constraintVertical_bias="0.316" />
+
+>>>>>>> 6e54093d364a7de7e4ba30ab24dc3a98f34f6f77
 
     <EditText
         android:id="@+id/usernameCreate"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_marginStart="24dp"
+<<<<<<< HEAD
         android:layout_marginTop="216dp"
         android:layout_marginEnd="24dp"
         android:background="@drawable/button_log"
@@ -81,11 +98,24 @@
         app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/usernameCreate" />
+=======
+        android:layout_marginTop="160dp"
+        android:layout_marginEnd="24dp"
+        android:drawablePadding="10dp"
+        android:hint="Username"
+        android:inputType="textPersonName"
+        android:selectAllOnFocus="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.507"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+>>>>>>> 6e54093d364a7de7e4ba30ab24dc3a98f34f6f77
 
     <EditText
         android:id="@+id/passwordCreate"
         android:layout_width="300dp"
         android:layout_height="50dp"
+<<<<<<< HEAD
         android:layout_marginTop="40dp"
         android:background="@drawable/button_log"
         android:drawablePadding="10dp"
@@ -93,16 +123,42 @@
         android:imeOptions="actionDone"
         android:inputType="textPassword"
         android:paddingStart="15dp"
+=======
+        android:layout_marginTop="20dp"
+        android:drawablePadding="10dp"
+        android:hint="Password"
+        android:imeOptions="actionDone"
+        android:inputType="textPassword"
+>>>>>>> 6e54093d364a7de7e4ba30ab24dc3a98f34f6f77
         android:selectAllOnFocus="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/emailCreate" />
 
+<<<<<<< HEAD
+=======
+    <EditText
+        android:id="@+id/passwordCreateConfirm"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:drawablePadding="10dp"
+        android:hint="Confirm Password"
+        android:imeOptions="actionDone"
+        android:inputType="textPassword"
+        android:selectAllOnFocus="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/passwordCreate" />
+
+>>>>>>> 6e54093d364a7de7e4ba30ab24dc3a98f34f6f77
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+<<<<<<< HEAD
         android:text="Username"
         android:textColor="@color/azul_escuro"
         android:textSize="16dp"
@@ -180,24 +236,56 @@
         android:layout_height="wrap_content"
         android:text="Welcome!"
         android:textColor="@color/azul_escuro"
+=======
+        android:text="Register"
+        android:textColor="#000000"
+>>>>>>> 6e54093d364a7de7e4ba30ab24dc3a98f34f6f77
         android:textSize="35dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+<<<<<<< HEAD
         app:layout_constraintHorizontal_bias="0.529"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.095" />
+=======
+        app:layout_constraintHorizontal_bias="0.093"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.116" />
+
+    <EditText
+        android:id="@+id/emailCreate"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:drawablePadding="10dp"
+        android:ems="10"
+        android:hint="E-mail"
+        android:inputType="textEmailAddress"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/usernameCreate" />
+>>>>>>> 6e54093d364a7de7e4ba30ab24dc3a98f34f6f77
 
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="280dp"
         android:layout_height="21dp"
+<<<<<<< HEAD
         android:layout_marginTop="52dp"
         android:gravity="center"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
+=======
+        android:layout_marginTop="136dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+>>>>>>> 6e54093d364a7de7e4ba30ab24dc3a98f34f6f77
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/passwordCreateConfirm">
 
@@ -212,6 +300,7 @@
             android:layout_height="wrap_content"
             android:text="Login!"
             android:textStyle="bold"></TextView>
+<<<<<<< HEAD
 
     </LinearLayout>
 
@@ -259,4 +348,8 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
+=======
+    </LinearLayout>
+
+>>>>>>> 6e54093d364a7de7e4ba30ab24dc3a98f34f6f77
 </androidx.constraintlayout.widget.ConstraintLayout>

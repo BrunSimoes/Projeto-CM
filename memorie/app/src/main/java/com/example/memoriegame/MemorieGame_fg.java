@@ -1,5 +1,6 @@
 package com.example.memoriegame;
 
+import android.app.Dialog;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -12,6 +13,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -32,10 +37,12 @@ public class MemorieGame_fg extends Fragment {
     //OBJ
     private Cartas[] cartas = new Cartas[nCartas];
     private ImageView[] Imagens = new ImageView[nCartas];
-    private Integer[] ordemCartas= new Integer[nCartas];
 
     //Score
     private int score = 0;
+
+    //Nivel
+    private int nivel = 3;
 
     private int primeiraCarta, segundaCarta = 0;
     private int pos1Carta, pos2Carta;
@@ -54,10 +61,26 @@ public class MemorieGame_fg extends Fragment {
     private long timestampStart = SystemClock.elapsedRealtime();
     private long timestampLast = SystemClock.elapsedRealtime();
 
+    //Funcao //f(x)=((1)/(1+ℯ^(-0.3 (-x+30))))+1 -> funcao logistica max/inicio_x2 - min/fim_x1
+    private float declive   = 0.2f;
+    private float transVert = 1.f;
+    private float transHori = 30.f;
+    private float salto     = 1.f;
+
+    private int margem      = 2;
+
+    //Button
+    private ImageButton hamButton;
+
+
+    //SESSION MANAGER
+    private SessionManager sessionManager;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        sessionManager = new SessionManager(requireContext());
     }
 
     @Override
@@ -74,6 +97,14 @@ public class MemorieGame_fg extends Fragment {
 
         Timer = view.findViewById(R.id.TimerText);
         Timer.setText("00:00");
+
+        hamButton = view.findViewById(R.id.popupButton);
+        hamButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                exibirDialog2();
+            }
+        });
 
         //Iniciar Timer
         counterTime.iniciarContador();
@@ -107,9 +138,10 @@ public class MemorieGame_fg extends Fragment {
 
         //carregar as imagens para o array
         loadImgs(view);
+        associate();
 
         //shuffle mistura as imagens
-        Collections.shuffle(Arrays.asList(ordemCartas));
+        Collections.shuffle(Arrays.asList(cartas));
 
         for(int i = 0; i < Imagens.length; i++) {
             final int pos = i;
@@ -119,21 +151,23 @@ public class MemorieGame_fg extends Fragment {
                 @Override
                 public void onClick(View view) {
                     if (nClicks == 0) {
-                        primeiraCarta = ordemCartas[pos];
+                        primeiraCarta = cartas[pos].obterIdImage();
                         Log.d("prima", String.valueOf(primeiraCarta));
                         nClicks++;
 
                         Imagens[pos].setClickable(false);
-                        mostrarCarta(Imagens[pos],ordemCartas[pos]);
+                        mostrarCarta(Imagens[pos],cartas[pos].obterIdImage());
+                        cartas[pos].setClicked(true);
 
                         pos1Carta=pos;
 
                     } else if (nClicks == 1) {
-                        segundaCarta = ordemCartas[pos];
+                        segundaCarta = cartas[pos].obterIdImage();
                         Log.d("cega", String.valueOf(segundaCarta));
 
-                        mostrarCarta(Imagens[pos],ordemCartas[pos]);
+                        mostrarCarta(Imagens[pos],cartas[pos].obterIdImage());
                         Imagens[pos].setClickable(false);
+                        cartas[pos].setClicked(true);
 
                         nClicks=0;
                         pos2Carta=pos;
@@ -160,6 +194,19 @@ public class MemorieGame_fg extends Fragment {
 
     }
 
+    private void associate(){
+        //No Verificar se o numero de cartas Igual a Imagens
+        //atribuição de uma Tag a Imagens para rodar a carta de forma automatica
+        //quando a usar o power up de relevar
+        if(cartas.length == Imagens.length) {
+            for (int i = 0; i <cartas.length; i++) {
+                cartas[i].setId((int) Imagens[i].getTag());
+            }
+        }else {
+            Log.d("error","Carregamento de Cartas ou Elementos de Imagem Incorreto");
+        }
+    }
+
     private void loadImgs(View view){
         // Usando um ciclo para inicializar os TextViews com findViewById
         int aux = 1;
@@ -181,12 +228,12 @@ public class MemorieGame_fg extends Fragment {
                 if (Imagens[i] != null) {
                     Imagens[i].setTag(i);
                     Log.d("tag",i+"");
-                    int resourceId = getResources().getIdentifier("placeholder_0" + aux, "drawable", getActivity().getPackageName());
+                    int resourceId = getResources().getIdentifier("carta" + aux, "drawable", getActivity().getPackageName());
                     Log.d("bb", (i % 9)+"");
 
                     if (resourceId != 0) {
-                        ordemCartas[i] = resourceId;
-                        Imagens[i].setImageResource(R.drawable.cartaoculta);
+                        cartas[i] = new Cartas(resourceId,i);
+                        Imagens[i].setImageResource(R.drawable.carta_fundo);
                         Imagens[i].setClickable(true);
                     }
                 }
@@ -210,19 +257,28 @@ public class MemorieGame_fg extends Fragment {
 
     private void mecanica(){
         if(primeiraCarta == segundaCarta){
-            score++;
-            Imagens[pos1Carta].setVisibility(View.INVISIBLE);
-            Imagens[pos2Carta].setVisibility(View.INVISIBLE);
+            turno++;
+            calcScore();
+
+            iniciarAnimacao(Imagens[pos1Carta], 1.0f, 0.1f);
+            iniciarAnimacao(Imagens[pos2Carta], 1.0f, 0.1f);
+
+            cartas[pos1Carta].desativar();
+            cartas[pos2Carta].desativar();
+
             enable();
             Score.setText(String.valueOf(score));
         }else{
             turno++;
-            ocultarCarta(Imagens[pos1Carta],R.drawable.cartaoculta);
-            ocultarCarta(Imagens[pos2Carta],R.drawable.cartaoculta);
+            ocultarCarta(Imagens[pos1Carta],R.drawable.carta_fundo);
+            ocultarCarta(Imagens[pos2Carta],R.drawable.carta_fundo);
             enable();
         }
 
+        String userEmail = sessionManager.getUserEmail();
         if(checkOver()){
+            firebaseData.uploadScore(userEmail, nivel, score);
+            exibirDialog();
             Log.d("Status","Game Over!");
         }
     }
@@ -235,14 +291,16 @@ public class MemorieGame_fg extends Fragment {
 
     private void enable(){
         for(int i=0; i<Imagens.length; i++){
-            Imagens[i].setClickable(true);
+            if(cartas[i].obterStatus()){
+                Imagens[i].setClickable(true);
+            }
         }
     }
-    private boolean checkOver(){
+    private boolean checkOver() {
         boolean aux = true;
 
-        for(int i=0; i<Imagens.length; i++){
-            if(Imagens[i].getVisibility() != View.INVISIBLE){
+        for (int i = 0; i < Imagens.length; i++) {
+            if (cartas[i].obterStatus()) {
                 aux = false;
                 break;
             }
@@ -251,4 +309,137 @@ public class MemorieGame_fg extends Fragment {
         return aux;
     }
 
+    private void calcScore(){
+        //f(x)=((2)/(1+ℯ^(-0.3 (-x+30))))
+        float x = counterTime.getTempoAtual();
+        float mult = (float) ((salto)/(1 + Math.pow(Math.E,(-1*declive)*(-x+transHori)))+transVert);
+        float pulo = (float) (((90)/(1 + Math.pow(Math.E,(-0.2f)*(-turno+30))))+10); //70 jogadas devolve 10pts
+        score += (int) pulo * mult;
+    }
+
+    private void exibirDialog() {
+        // Cria um objeto de diálogo
+        final Dialog dialog = new Dialog(getActivity());
+
+        // Define o conteúdo do diálogo a partir do layout XML
+        dialog.setContentView(R.layout.gameover_dialog);
+
+        TextView Score     = dialog.findViewById(R.id.textScoreWrite);
+        TextView Challenge = dialog.findViewById(R.id.textChallenge);
+        TextView Time      = dialog.findViewById(R.id.textTimeWrite);
+
+        Score.setText(String.valueOf(score));
+        Time.setText(String.valueOf(counterTime.getTempoAtual()));
+        Challenge.setText("Challenge " + 1);
+
+        //Load Buttons
+        Button restart = dialog.findViewById(R.id.button);
+        Button exit    = dialog.findViewById(R.id.button2);
+
+        restart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        exit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                restartAll();
+                dialog.dismiss();
+            }
+        });
+
+        //Load ImgButton
+        ImageButton cross = dialog.findViewById(R.id.imageButton);
+
+        // Exibe o diálogo
+        dialog.show();
+    }
+
+    private void exibirDialog2() {
+        // Cria um objeto de diálogo
+        final Dialog dialog = new Dialog(getActivity());
+
+        // Define o conteúdo do diálogo a partir do layout XML
+        dialog.setContentView(R.layout.menu_dialog);
+
+        //Load Buttons
+        Button restart = dialog.findViewById(R.id.button1);
+        Button exit    = dialog.findViewById(R.id.button);
+
+        exit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        restart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                restartAll();
+                dialog.dismiss();
+            }
+        });
+
+        //Load ImgButton
+        ImageButton cross = dialog.findViewById(R.id.imageButton);
+        cross.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //TO DO METER EM PAUSA
+                dialog.dismiss();
+            }
+        });
+
+        // Exibe o diálogo
+        dialog.show();
+    }
+
+    private void restartAll(){
+        for(int i = 0; i<Imagens.length; i++){
+           Imagens[i].setClickable(true);
+           Imagens[i].setAlpha(1f);
+           Imagens[i].setImageResource(R.drawable.carta_fundo);
+
+           cartas[i].ativar();
+           cartas[i].setClicked(false);
+        }
+
+        counterTime.reset();
+        score = 0;
+
+        Score.setText(String.valueOf(0));
+        Timer.setText("00:00");
+
+        Collections.shuffle(Arrays.asList(cartas));
+
+        Log.d("restart","restart");
+    }
+
+
+    private void iniciarAnimacao(ImageView elemento, float inicial, float fin) {
+        AlphaAnimation animacao = new AlphaAnimation(inicial, fin);
+
+        animacao.setDuration(500);
+
+        animacao.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                elemento.setAlpha(fin);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+            }
+        });
+
+        elemento.startAnimation(animacao);
+    }
 }

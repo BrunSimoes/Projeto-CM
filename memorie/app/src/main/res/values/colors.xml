@@ -4,5 +4,8 @@
     <color name="white">#FFFFFFFF</color>
     <color name="fundo">#E0EEEB</color>
     <color name="azul_escuro">#2F806F</color>
+<<<<<<< HEAD
     <color name="branco_sujo">#fcf3ed</color>
+=======
+>>>>>>> 6e54093d364a7de7e4ba30ab24dc3a98f34f6f77
 </resources>

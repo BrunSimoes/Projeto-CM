@@ -31,9 +31,15 @@
             android:id="@+id/button2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+<<<<<<< HEAD
             android:text="restart"
 
             android:backgroundTint="@color/branco_sujo"
+=======
+            android:text="Restart"
+
+            android:background="@drawable/rounded_button_2"
+>>>>>>> 6e54093d364a7de7e4ba30ab24dc3a98f34f6f77
             android:textColor="@color/azul_escuro"
 
             app:layout_constraintBottom_toBottomOf="parent"
@@ -46,9 +52,15 @@
             android:id="@+id/button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+<<<<<<< HEAD
             android:text="exit"
 
             android:backgroundTint="@color/branco_sujo"
+=======
+            android:text="Exit"
+
+            android:background="@drawable/rounded_button_2"
+>>>>>>> 6e54093d364a7de7e4ba30ab24dc3a98f34f6f77
             android:textColor="@color/azul_escuro"
 
             app:layout_constraintBottom_toBottomOf="parent"
@@ -136,7 +148,11 @@
             android:layout_width="177dp"
             android:layout_height="24dp"
             android:layout_marginTop="7dp"
+<<<<<<< HEAD
             android:text="Round 4"
+=======
+            android:text="Challenge 4"
+>>>>>>> 6e54093d364a7de7e4ba30ab24dc3a98f34f6f77
             android:textColor="@color/white"
             android:textAlignment="center"
             app:layout_constraintEnd_toEndOf="parent"

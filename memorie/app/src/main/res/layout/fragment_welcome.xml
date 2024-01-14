@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+<<<<<<< HEAD
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -148,3 +149,22 @@
         app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+=======
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#E0EEEB">
+
+    <Button
+        android:id="@+id/play_button"
+        android:layout_width="120dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="144dp"
+        android:layout_marginBottom="120dp"
+        android:backgroundTint="#2F806F"
+        android:text="let's play"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/register_button"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
+>>>>>>> 6e54093d364a7de7e4ba30ab24dc3a98f34f6f77

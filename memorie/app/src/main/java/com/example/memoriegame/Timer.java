@@ -41,4 +41,8 @@ public class Timer {
     public void pararContador() {
         handler.removeCallbacks(runnable);
     }
+
+    public void reset(){
+        tempoAtual=0;
+    }
 }

@@ -11,9 +11,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="12dp"
+<<<<<<< HEAD
         android:text="Are you ready for this?"
         android:textSize="30dp"
         android:textColor="@color/azul_escuro"
+=======
+        android:text="Train your brain"
+>>>>>>> 6e54093d364a7de7e4ba30ab24dc3a98f34f6f77
         android:textAlignment="center"
         app:layout_constraintBottom_toTopOf="@+id/textView3"
         app:layout_constraintEnd_toEndOf="parent"
@@ -23,14 +27,21 @@
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+<<<<<<< HEAD
         android:layout_marginBottom="48dp"
         android:text="Solve various memory games&#xA; and test your memory"
         android:textAlignment="center"
         android:textColor="@color/azul_escuro"
+=======
+        android:layout_marginBottom="64dp"
+        android:text="Solve various memory games and test your memory&#xA;Train your brain"
+        android:textAlignment="center"
+>>>>>>> 6e54093d364a7de7e4ba30ab24dc3a98f34f6f77
         app:layout_constraintBottom_toTopOf="@+id/login_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
+<<<<<<< HEAD
     <ImageView
         android:layout_width="306dp"
         android:layout_height="418dp"
@@ -49,6 +60,15 @@
         android:backgroundTint="#2F806F"
         android:text="login"
         android:textColor="@color/branco_sujo"
+=======
+    <Button
+        android:id="@+id/login_button"
+        android:layout_width="120dp"
+        android:layout_height="70dp"
+        android:layout_marginBottom="140dp"
+        android:backgroundTint="#2F806F"
+        android:text="login"
+>>>>>>> 6e54093d364a7de7e4ba30ab24dc3a98f34f6f77
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/register_button"
         app:layout_constraintHorizontal_bias="0.5"
@@ -56,10 +76,17 @@
 
     <Button
         android:id="@+id/register_button"
+<<<<<<< HEAD
         android:layout_width="130dp"
         android:layout_height="60dp"
         android:layout_marginBottom="140dp"
         android:backgroundTint="@color/branco_sujo"
+=======
+        android:layout_width="120dp"
+        android:layout_height="70dp"
+        android:layout_marginBottom="140dp"
+        android:backgroundTint="#FFFFFF"
+>>>>>>> 6e54093d364a7de7e4ba30ab24dc3a98f34f6f77
         android:text="sign up"
         android:textColor="#2F806F"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -67,6 +94,10 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/login_button"
         app:strokeColor="#2F806F"
+<<<<<<< HEAD
         app:strokeWidth="4px" />
 
+=======
+        app:strokeWidth="5px" />
+>>>>>>> 6e54093d364a7de7e4ba30ab24dc3a98f34f6f77
 </androidx.constraintlayout.widget.ConstraintLayout>

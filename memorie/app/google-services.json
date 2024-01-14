@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "334615752563",
+    "project_id": "projeto-cm-ef094",
+    "storage_bucket": "projeto-cm-ef094.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:334615752563:android:722666690601a81a0d5f06",
+        "android_client_info": {
+          "package_name": "com.example.memoriegame"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDTnzVfkt6DzTAsqROfXWmVFyOwUeRiwXg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
