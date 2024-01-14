@@ -66,6 +66,9 @@ public class MemorieGame_fg extends Fragment {
 
     private int margem      = 2;
 
+    //Button
+    private ImageButton hamButton;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
