@@ -40,35 +40,4 @@ public class firebaseData {
 
         db.collection("users").add(userMap);
     }
-
-
-    //GET DATA FUNCTIONS
-    static void getAllScores() {
-        db.collection("scores")
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-
-                            List<String> scoreDataList = new ArrayList<>();
-                            for (DocumentSnapshot document : task.getResult()) {
-                                String email = document.getString("user");
-                                String level = document.getString("level");
-                                String score = document.getString("score");
-
-                                scoreDataList.add("email: " + email + ", level: " + level + ", score: " + score);
-                            }
-
-                            for (String scoreData : scoreDataList) {
-                                Log.d("FirestoreData", scoreData);
-                            }
-
-                        } else {
-                            Log.w("FirestoreData", "Error getting documents.", task.getException());
-                        }
-                    }
-                });
-    }
-
 }

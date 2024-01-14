@@ -327,9 +327,9 @@ public class MemorieGame_fg extends Fragment {
             enable();
         }
 
-        String userEmail = sessionManager.getUserEmail();
+        String userName = sessionManager.getUserName();
         if(checkOver()){
-            firebaseData.uploadScore(userEmail, nivel, score);
+            firebaseData.uploadScore(userName, nivel, score);
             exibirDialog();
             Log.d("Status","Game Over!");
         }

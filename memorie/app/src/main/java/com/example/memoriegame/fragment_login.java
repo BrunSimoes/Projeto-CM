@@ -27,6 +27,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 
 
@@ -120,6 +121,11 @@ public class fragment_login extends Fragment {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
+
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                String username = document.getString("username");
+                                sessionManager.setUserName(username);
+                            }
                             sessionManager.setLoggedIn(true);
                             sessionManager.setUserEmail(email);
                             for (DocumentSnapshot document : task.getResult()) {
