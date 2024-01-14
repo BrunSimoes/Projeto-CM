@@ -91,6 +91,14 @@ public class MemorieGame_fg extends Fragment {
         Timer = view.findViewById(R.id.TimerText);
         Timer.setText("00:00");
 
+        hamButton = view.findViewById(R.id.popupButton);
+        hamButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                exibirDialog2();
+            }
+        });
+
         //Iniciar Timer
         counterTime.iniciarContador();
 
@@ -213,7 +221,7 @@ public class MemorieGame_fg extends Fragment {
                 if (Imagens[i] != null) {
                     Imagens[i].setTag(i);
                     Log.d("tag",i+"");
-                    int resourceId = getResources().getIdentifier("placeholder_0" + aux, "drawable", getActivity().getPackageName());
+                    int resourceId = getResources().getIdentifier("carta" + aux, "drawable", getActivity().getPackageName());
                     Log.d("bb", (i % 9)+"");
 
                     if (resourceId != 0) {
@@ -336,6 +344,46 @@ public class MemorieGame_fg extends Fragment {
 
         //Load ImgButton
         ImageButton cross = dialog.findViewById(R.id.imageButton);
+
+        // Exibe o diálogo
+        dialog.show();
+    }
+
+    private void exibirDialog2() {
+        // Cria um objeto de diálogo
+        final Dialog dialog = new Dialog(getActivity());
+
+        // Define o conteúdo do diálogo a partir do layout XML
+        dialog.setContentView(R.layout.menu_dialog);
+
+        //Load Buttons
+        Button restart = dialog.findViewById(R.id.button1);
+        Button exit    = dialog.findViewById(R.id.button);
+
+        exit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        restart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                restartAll();
+                dialog.dismiss();
+            }
+        });
+
+        //Load ImgButton
+        ImageButton cross = dialog.findViewById(R.id.imageButton);
+        cross.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //TO DO METER EM PAUSA
+                dialog.dismiss();
+            }
+        });
 
         // Exibe o diálogo
         dialog.show();
