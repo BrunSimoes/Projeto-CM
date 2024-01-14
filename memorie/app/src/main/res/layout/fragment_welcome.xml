@@ -16,11 +16,15 @@
 
     <!-- ImageView 3 -->
 
+    <!--cartas canto esquerdo inferior -->
+
+    <!-- cartas lado direito centro-->
+
     <Button
         android:id="@+id/play_button"
         android:layout_width="160dp"
         android:layout_height="60dp"
-        android:layout_marginBottom="176dp"
+        android:layout_marginBottom="160dp"
         android:backgroundTint="#2F806F"
         android:text="let's play!"
         android:textColor="@color/branco_sujo"
@@ -29,48 +33,42 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <!--cartas canto esquerdo inferior -->
-
     <ImageView
+        android:id="@+id/imageView27"
         android:layout_width="136dp"
         android:layout_height="234dp"
-        android:layout_marginTop="532dp"
+        android:layout_marginStart="-35dp"
+        android:layout_marginBottom="-55dp"
         android:rotation="10"
         android:src="@drawable/carta_fundo"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="136dp"
         android:layout_height="234dp"
-        android:layout_marginTop="584dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginBottom="-100dp"
         android:rotation="40"
         android:src="@drawable/carta_fundo"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.178"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
         android:layout_width="136dp"
         android:layout_height="234dp"
-        android:layout_marginTop="544dp"
-        android:rotation="50"
+        android:layout_marginBottom="-59dp"
+        android:rotation="35"
         android:src="@drawable/carta8"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <!-- cartas lado direito centro-->
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
         android:layout_width="136dp"
         android:layout_height="234dp"
         android:layout_marginTop="260dp"
+        android:layout_marginEnd="-60dp"
         android:rotation="-50"
         android:src="@drawable/carta_fundo"
         app:layout_constraintEnd_toEndOf="parent"
@@ -82,6 +80,7 @@
         android:layout_width="136dp"
         android:layout_height="234dp"
         android:layout_marginTop="148dp"
+        android:layout_marginEnd="-50dp"
         android:rotation="-10"
         android:src="@drawable/carta_fundo"
         app:layout_constraintEnd_toEndOf="parent"
@@ -93,6 +92,7 @@
         android:layout_width="136dp"
         android:layout_height="234dp"
         android:layout_marginTop="200dp"
+        android:layout_marginEnd="-50dp"
         android:rotation="-30"
         android:src="@drawable/carta4"
         app:layout_constraintEnd_toEndOf="parent"
@@ -115,16 +115,17 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
+    <!--cartas no top superior esquerdo-->
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
         android:text="Card Game"
         android:textColor="@color/black"
         android:textSize="24sp"
-        app:layout_constraintTop_toBottomOf="@+id/textView6"
-        tools:layout_editor_absoluteX="26dp" />
-
-    <!--cartas no top superior esquerdo-->
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
     <ImageView
         android:layout_width="136dp"
