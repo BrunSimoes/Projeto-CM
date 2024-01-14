@@ -14,6 +14,13 @@ public class SessionManager {
     private SharedPreferences.Editor editor;
     private Context context;
 
+    private static final String N_CARDS = "nCards";
+    private static final String N_POWER = "nPower";
+    private static final String N_JOCA = "Joca";
+    private static final String N_COLUNAS = "nColunas";
+    private static final String N_LINHAS = "nLinhas" ;
+
+
     public SessionManager(Context context) {
         this.context = context;
         sharedPreferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
@@ -55,6 +62,48 @@ public class SessionManager {
     public boolean isLoggedIn() {
         return sharedPreferences.getBoolean(KEY_IS_LOGGED_IN, false);
     }
+
+    public void setNCards(String nCards) {
+        editor.putString(N_CARDS, nCards);
+        editor.apply();
+    }
+    public String getNCards() {
+        return sharedPreferences.getString(N_CARDS, null);
+    }
+
+    public void setNPower(String nPower) {
+        editor.putString(N_POWER, nPower);
+        editor.apply();
+    }
+    public String getNPower() {
+        return sharedPreferences.getString(N_POWER, null);
+    }
+
+    public void setNJoca(String nJoca) {
+        editor.putString(N_JOCA, nJoca);
+        editor.apply();
+    }
+    public String getNJoker() {
+        return sharedPreferences.getString(N_JOCA, null);
+    }
+
+    public void setNColuna(String nColuna) {
+        editor.putString(N_COLUNAS, nColuna);
+        editor.apply();
+    }
+    public String getNColuna() {
+        return sharedPreferences.getString(N_COLUNAS, null);
+    }
+
+    public void setNRow(String nRow) {
+        editor.putString(N_LINHAS, nRow);
+        editor.apply();
+    }
+    public String getNRow() {
+        return sharedPreferences.getString(N_LINHAS, null);
+    }
+
+
 
 }
 
