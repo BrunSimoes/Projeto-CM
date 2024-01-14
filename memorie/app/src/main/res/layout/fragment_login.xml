@@ -107,14 +107,26 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+<<<<<<< HEAD
             android:text="New on this app? "></TextView>
+=======
+            android:text="New on this app? ">
+
+        </TextView>
+>>>>>>> 6e54093d364a7de7e4ba30ab24dc3a98f34f6f77
 
         <TextView
             android:id="@+id/registerRed"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Register In Here!"
+<<<<<<< HEAD
             android:textStyle="bold"></TextView>
+=======
+            android:textStyle="bold">
+
+        </TextView>
+>>>>>>> 6e54093d364a7de7e4ba30ab24dc3a98f34f6f77
     </LinearLayout>
 
 
