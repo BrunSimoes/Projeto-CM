@@ -6,14 +6,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -27,14 +25,12 @@ import java.util.List;
 
 import android.util.Log;
 
-import android.content.Context;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Button;
+import android.widget.ImageView;
 
 public class fragment_leaderboard extends Fragment {
 
-    Button rounds;
+    ImageView rounds;
 
     private static FirebaseFirestore db = FirebaseFirestore.getInstance();
     private static final String TAG = "FirestoreExample";
