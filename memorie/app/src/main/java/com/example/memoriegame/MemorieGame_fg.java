@@ -32,6 +32,7 @@ public class MemorieGame_fg extends Fragment {
 
     private TextView Score;
     private TextView Timer;
+    private TextView Multipler;
     private final int nCartas = 16;
     private  final int nPower = 6;
 
@@ -109,6 +110,9 @@ public class MemorieGame_fg extends Fragment {
 
         Timer = view.findViewById(R.id.TimerText);
         Timer.setText("00:00");
+
+        Multipler= view.findViewById(R.id.textMultiplaer);
+        Multipler.setText(String.valueOf(multiplayer));
 
         hamButton = view.findViewById(R.id.popupButton);
         hamButton.setOnClickListener(new View.OnClickListener() {
@@ -331,6 +335,7 @@ public class MemorieGame_fg extends Fragment {
             combo = 0;
             turno++;
             multiplayer = 1;
+            Multipler.setText("x" + String.valueOf(multiplayer));
             ocultarCarta(Imagens[pos1Carta],R.drawable.carta_fundo);
             ocultarCarta(Imagens[pos2Carta],R.drawable.carta_fundo);
             enable();
@@ -428,22 +433,21 @@ public class MemorieGame_fg extends Fragment {
         Button restart = dialog.findViewById(R.id.button2);
         Button exit    = dialog.findViewById(R.id.button);
 
-        restart.setOnClickListener(new View.OnClickListener() {
+        exit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
+                getFragmentManager().beginTransaction()
+                        .replace(R.id.fragment, fragment_rounds.class, null)
+                        .commit();
             }
         });
 
-        exit.setOnClickListener(new View.OnClickListener() {
+        restart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 restartAll();
                 dialog.dismiss();
-
-                getFragmentManager().beginTransaction()
-                        .replace(R.id.fragment, fragment_rounds.class, null)
-                        .commit();
             }
         });
 
@@ -565,6 +569,7 @@ public class MemorieGame_fg extends Fragment {
 
                                         if (3 == (int) ImagePower[posP].getTag()) {
                                             multiplayer = 2;
+                                            Multipler.setText("x" + String.valueOf(multiplayer));
                                             iniciarAnimacao(ImagePower[posP],1f,0.1f);
                                         }
 
